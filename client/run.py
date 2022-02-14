@@ -33,7 +33,7 @@ def run():
 
     pygame.init()
     pygame.font.init()
-    font = pygame.font.SysFont("arial", 30)
+    font = pygame.font.SysFont("arial", sizes.BIG_FONT_SIZE)
 
     clock = pygame.time.Clock()
     client.canvas = pygame.display.set_mode((sizes.SCREEN_WIDTH, sizes.SCREEN_HEIGHT))
@@ -77,7 +77,7 @@ def run():
         else:
             textsurface = font.render(
                 f"Player {client.state.client_player}/ "
-                f"{'It`s your turn!' if client.state.turn == client.state.client_player else 'Waiting for enemy move.'}",
+                f'''{"It's your turn!" if client.state.turn == client.state.client_player else 'Waiting for enemy move.'}''',
                 True,
                 (0, 0, 0),
             )

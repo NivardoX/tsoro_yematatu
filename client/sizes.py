@@ -1,4 +1,7 @@
-scale_factor = 2
+scale_factor = 1
+SMALL_FONT_SIZE = 15 * scale_factor
+MEDIUM_FONT_SIZE = 15 * scale_factor
+BIG_FONT_SIZE = 30 * scale_factor
 MARGIN_BIG = 50 * scale_factor
 MARGIN_SMALL = 10 * scale_factor
 MARGIN_TINY = 2.5 * scale_factor
@@ -22,7 +25,7 @@ CHAT_INPUT_BOX_COUNTER_LEFT_MARGIN = CHAT_WIDTH - (40 * scale_factor)
 
 CHAT_MESSAGE_HEIGTH = 25 * scale_factor
 CHAT_MESSAGE_MARGIN_TOP = CHAT_MESSAGE_HEIGTH + MARGIN_TINY * scale_factor
-CHAT_MESSAGE_INNER_MARGIN_TOP = 15 * scale_factor
+CHAT_MESSAGE_INNER_MARGIN_TOP = SMALL_FONT_SIZE // 2
 
 CHAT_NUMBER_OF_MESSAGES = CHAT_HEIGHT // CHAT_MESSAGE_MARGIN_TOP
 

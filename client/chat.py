@@ -6,7 +6,7 @@ from client import sizes
 from client.chat_handler import ChatHandler
 
 pygame.font.init()
-font = pygame.font.SysFont("arial", 15)
+font = pygame.font.SysFont("arial", sizes.SMALL_FONT_SIZE)
 
 
 class Chat(object):
@@ -78,7 +78,7 @@ class Chat(object):
             system_message = message.sender_type == "SYSTEM"
             client.canvas.blit(
                 font.render(
-                    f"Player {message.player}: {message.message}"
+                    f"P{message.player}: {message.message}"
                     if not system_message
                     else message.message,
                     True,

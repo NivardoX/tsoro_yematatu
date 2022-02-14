@@ -2,13 +2,14 @@ import pygame
 
 import client
 from client import state, sizes
+from client.chat_handler import ChatHandler
 from client.piece import Piece
 from client.state import send_event, toggle_turn
 from client.tile import Tile
 from client.point import Point
 
 pygame.font.init()
-font = pygame.font.SysFont("arial", 15)
+font = pygame.font.SysFont("arial", sizes.MEDIUM_FONT_SIZE)
 
 
 class Board:
@@ -40,7 +41,9 @@ class Board:
     def emit(self, event, data):
         player = client.state.turn
         if event == "SURRENDER":
-            self.on_vitory(1 if data['player'] == 2 else 1)
+            surrendered_player = 1 if data['player'] == 2 else 1
+            self.on_vitory(surrendered_player)
+            ChatHandler.send_message(f"PLAYER {data['player']} SURRENDERED",as_system=True)
         if event == "TILE_FOR_MOVEMENT_SELECTED":
             if self.status == "WAITING_FOR_PIECE_FOR_MOVEMENT":
                 moved_piece = self.selected_piece

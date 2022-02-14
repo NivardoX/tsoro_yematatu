@@ -35,20 +35,20 @@ client_player = None
 
 
 def pick_color(color, player):
-    ChatHandler.send_message(f"PLAYER {player} CHOOSE HIS COLOR", as_system=True)
+    ChatHandler.send_message(f"P{player} PICKED HIS COLOR", as_system=True)
     if color in availible_colors:
         picked_colors[player - 1] = color
 
 
 def pick_vote(vote, player):
-    ChatHandler.send_message(f"PLAYER {player} VOTED FOR {vote}", as_system=True)
+    ChatHandler.send_message(f"P{player} VOTED FOR {vote}", as_system=True)
 
     votes[player - 1] = vote
 
 
 def decide_winner():
     if votes[0] == votes[1]:
-        ChatHandler.send_message(f"PLAYER {votes[0]} HAS WON.", as_system=True)
+        ChatHandler.send_message(f"P{votes[0]} HAS WON.", as_system=True)
         return votes[0]
 
     else:
@@ -57,7 +57,7 @@ def decide_winner():
         )
         random_choice = votes[random.getrandbits(1)]
         ChatHandler.send_message(
-            f"PLAYER {random_choice} WAS PICKED RANDOMLY.",
+            f"P{random_choice} WAS PICKED RANDOMLY.",
             as_system=True,
             force_publish=True,
         )
