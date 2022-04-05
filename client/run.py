@@ -54,7 +54,6 @@ def run():
         clock.tick(10)
         client.canvas.fill(GREY)
 
-
         # Player header
         if victorious_player is not None:
             textsurface = font.render(
@@ -75,7 +74,7 @@ def run():
         else:
             textsurface = font.render(
                 f"Player {client.state.client_player}/ "
-                f'''{"It's your turn!" if client.state.turn == client.state.client_player else 'Waiting for enemy move.'}''',
+                f"""{"It's your turn!" if client.state.turn == client.state.client_player else 'Waiting for enemy move.'}""",
                 True,
                 (0, 0, 0),
             )

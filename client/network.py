@@ -10,7 +10,7 @@ from rpc.yematatu_server import serve
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 c = None
-client = None
+client:YematatuClient = None
 ports = [8123, 8124]
 
 
@@ -21,6 +21,8 @@ def start_listening_thread(port):
 
 def publish_event(event, data):
     global client
+    if not client:
+        raise Exception("Client should not be None")
 
     match event:
         case "_TOGGLE_TURN":

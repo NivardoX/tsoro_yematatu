@@ -12,12 +12,13 @@ class YematatuClient(object):
 
     def __init__(self, port):
 
-        self.host = 'localhost'
+        self.host = "localhost"
         self.server_port = port
 
         # instantiate a channel
         self.channel = grpc.insecure_channel(
-            '{}:{}'.format(self.host, self.server_port))
+            "{}:{}".format(self.host, self.server_port)
+        )
 
         # bind the client and the server
         self.stub = pb2_grpc.YematatuStub(self.channel)
@@ -36,7 +37,9 @@ class YematatuClient(object):
         """
 
         try:
-            return self.stub.HealthCheck(pb2.google_dot_protobuf_dot_empty__pb2.Empty()).received
+            return self.stub.HealthCheck(
+                pb2.google_dot_protobuf_dot_empty__pb2.Empty()
+            ).received
         except Exception:
             return False
 
@@ -47,7 +50,9 @@ class YematatuClient(object):
         return self.stub.PieceClicked(pb2.PieceClickedMessage(tile_id=tile_id))
 
     def piece_selected_for_movement(self, tile_id, moves):
-        return self.stub.PieceSelectedForMovement(pb2.PieceSelectedForMovementMessage(tile_id=tile_id, moves=moves))
+        return self.stub.PieceSelectedForMovement(
+            pb2.PieceSelectedForMovementMessage(tile_id=tile_id, moves=moves)
+        )
 
     def piece_moved(self):
         return self.stub.PieceMoved(pb2.google_dot_protobuf_dot_empty__pb2.Empty())
@@ -62,10 +67,14 @@ class YematatuClient(object):
         return self.stub.EmptyTileClicked(pb2.EmptyTileClickedMessage(id=id))
 
     def tile_for_movement_selected(self, id):
-        return self.stub.TileForMovementSelected(pb2.TileForMovementSelectedMessage(id=id))
+        return self.stub.TileForMovementSelected(
+            pb2.TileForMovementSelectedMessage(id=id)
+        )
 
     def new_chat_message(self, sender_type, message, player):
-        return self.stub.NewChatMessage(pb2.ChatMessage(sender_type=sender_type, message=message, player=player))
+        return self.stub.NewChatMessage(
+            pb2.ChatMessage(sender_type=sender_type, message=message, player=player)
+        )
 
     def turn_voted(self, vote):
         return self.stub.TurnVoted(pb2.TurnVotedMessage(vote=vote))
@@ -80,7 +89,7 @@ class YematatuClient(object):
         return self.stub.Finished(pb2.google_dot_protobuf_dot_empty__pb2.Empty())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     client = YematatuClient()
     result = client.healthcheck()
-    print(f'{result}')
+    print(f"{result}")

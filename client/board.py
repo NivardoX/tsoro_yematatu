@@ -42,9 +42,11 @@ class Board:
     def emit(self, event, data):
         player = client.state.turn
         if event == "SURRENDER":
-            surrendered_player = 1 if data['player'] == 2 else 1
+            surrendered_player = 1 if data["player"] == 2 else 1
             self.on_vitory(surrendered_player)
-            ChatHandler.send_message(f"PLAYER {data['player']} SURRENDERED",as_system=True)
+            ChatHandler.send_message(
+                f"PLAYER {data['player']} SURRENDERED", as_system=True
+            )
         if event == "TILE_FOR_MOVEMENT_SELECTED":
             if self.status == "WAITING_FOR_PIECE_FOR_MOVEMENT":
                 moved_piece = self.selected_piece
@@ -124,7 +126,9 @@ class Board:
 
     def propagate_click(self, pos):
         if self.surrender_rect.collidepoint(pos):
-            send_event("SURRENDER",{"player":client.state.client_player},bypass_turn=True)
+            send_event(
+                "SURRENDER", {"player": client.state.client_player}, bypass_turn=True
+            )
             return True
         if client.state.turn == client.state.client_player:
             for tile in self.tiles:
@@ -202,7 +206,7 @@ class Board:
                 sizes.SURRENDER_BUTTON_WIDTH,
                 sizes.SURRENDER_BUTTON_HEIGHT,
             ),
-            width=2
+            width=2,
         )
         pygame.draw.rect(
             client.canvas,
@@ -213,8 +217,10 @@ class Board:
         client.canvas.blit(
             font.render("SURRENDER", True, (0, 0, 0)),
             (
-                sizes.SCREEN_WIDTH - sizes.SURRENDER_BUTTON_WIDTH+ 2*sizes.MARGIN_SMALL,
-                2*sizes.MARGIN_TINY+sizes.SURRENDER_BUTTON_HEIGHT//2,
+                sizes.SCREEN_WIDTH
+                - sizes.SURRENDER_BUTTON_WIDTH
+                + 2 * sizes.MARGIN_SMALL,
+                2 * sizes.MARGIN_TINY + sizes.SURRENDER_BUTTON_HEIGHT // 2,
             ),
         )
 
