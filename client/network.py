@@ -2,54 +2,44 @@
 import json
 import socket
 import threading
+from time import sleep
 
 from client import logger
+from rpc.yematatu_client import YematatuClient
+from rpc.yematatu_server import serve
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 c = None
+client = None
+ports = [8123, 8124]
 
 
-def handle_client(conn, addr):
-    from client.state import receive_remote_event
-
-    while True:
-        message = conn.recv(1024)
-        message = message.decode()
-        packets = message.split("\n")
-        for packet in packets:
-            if packet != "":
-                logger.debug("[thread] client: recv: " + str(packet))
-                receive_remote_event(**json.loads(packet))
-
-
-def start_listining_thread(c, addr):
-    t = threading.Thread(target=handle_client, args=(c, addr))
+def start_listening_thread(port):
+    t = threading.Thread(target=serve, args=(port,))
     t.start()
 
 
 def publish_event(event, data):
-    socket = c or s
-    packet = json.dumps({"event": event, "data": data})
-    socket.send((packet + "\n").encode())
-    logger.debug("[thread] server: sent: " + packet)
+    global client
+    try:
+
+        client.send_event(event, data)
+        logger.debug(f"[{event}] server: sent: " + json.dumps(data))
+    except Exception as e:
+        print(str(e))
 
 
 def connect():
-    try:
-        logger.info("Trying to connect")
-        s.connect(("127.0.0.1", 8123))
-        start_listining_thread(s, "localhost")
-        logger.info("Connected")
-
+    global client
+    client = YematatuClient(8123)
+    if client.healthcheck():
+        start_listening_thread(8124)
         return 2
-    except Exception:
-        logger.info("Not able to connect. Becoming the server.")
-        global c
-        # No one listening, become the server
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        s.bind(("127.0.0.1", 8123))
-        s.listen(20)
-        logger.info("Waiting for connection")
-        c, addr = s.accept()
-        start_listining_thread(c, addr)
+    else:
+        start_listening_thread(8123)
+        client = YematatuClient(8124)
+
+        while not client.healthcheck():
+            logger.info("Trying to connect")
+            sleep(.2)
         return 1

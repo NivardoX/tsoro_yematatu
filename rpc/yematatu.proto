@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package yematatu;
+
+service Yematatu{
+  // A simple RPC.
+  //
+ rpc SendMessage(Message) returns (MessageResponse) {}
+ rpc HealthCheck(google.protobuf.Empty) returns (HealthCheckReponse) {}
+
+}
+
+message Message{
+ string event = 1;
+ string data = 2;
+}
+
+message MessageResponse{
+ string message = 1;
+ bool received = 2;
+}
+
+message HealthCheckReponse{
+ bool received = 1;
+}
