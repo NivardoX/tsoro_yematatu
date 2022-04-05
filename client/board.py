@@ -10,6 +10,7 @@ from client.point import Point
 
 pygame.font.init()
 font = pygame.font.SysFont("arial", sizes.MEDIUM_FONT_SIZE)
+font2 = pygame.font.SysFont("arial", sizes.SMALL_FONT_SIZE)
 
 
 class Board:

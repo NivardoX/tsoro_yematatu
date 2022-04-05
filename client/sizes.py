@@ -6,14 +6,14 @@ MARGIN_BIG = 50 * scale_factor
 MARGIN_SMALL = 10 * scale_factor
 MARGIN_TINY = 2.5 * scale_factor
 
-SCREEN_WIDTH = 750 * scale_factor
+SCREEN_WIDTH = 900 * scale_factor
 SCREEN_HEIGHT = 550 * scale_factor
 
-SURRENDER_BUTTON_WIDTH = 100 * scale_factor
+SURRENDER_BUTTON_WIDTH = 170 * scale_factor
 SURRENDER_BUTTON_HEIGHT = 30 * scale_factor
 
 
-CHAT_WIDTH = 200 * scale_factor
+CHAT_WIDTH = 250 * scale_factor
 CHAT_HEIGHT = 400 * scale_factor
 
 CHAT_INPUT_BOX_WIDTH = CHAT_WIDTH

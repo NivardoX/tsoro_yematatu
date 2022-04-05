@@ -53,9 +53,7 @@ def run():
     while running:
         clock.tick(10)
         client.canvas.fill(GREY)
-        #
-        # chat.root.update()
-        # chat.root.update_idletasks()
+
 
         # Player header
         if victorious_player is not None:
