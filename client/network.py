@@ -21,12 +21,38 @@ def start_listening_thread(port):
 
 def publish_event(event, data):
     global client
-    try:
 
-        client.send_event(event, data)
-        logger.debug(f"[{event}] server: sent: " + json.dumps(data))
-    except Exception as e:
-        print(str(e))
+    match event:
+        case "_TOGGLE_TURN":
+            client.toggle_turn()
+        case "PIECE_CLICKED":
+            client.piece_clicked(data['tile_id'])
+        case "PIECE_SELECTED_FOR_MOVEMENT":
+            client.piece_selected_for_movement(data['tile_id'],data['moves'])
+        case "PIECE_PLACED":
+            client.piece_placed()
+        case "PIECE_MOVED":
+            client.piece_moved()
+        case "SURRENDER":
+            client.surrender(data['player'])
+        case "EMPTY_TILE_CLICKED":
+            client.empty_tile_clicked(data['id'])
+        case "TILE_FOR_MOVEMENT_SELECTED":
+            client.tile_for_movement_selected(data['id'])
+        case "NEW_CHAT_MESSAGE":
+            client.new_chat_message(data['sender_type'],data['message'],data['player'])
+        case "TURN_VOTED":
+            client.turn_voted(data['vote'])
+        case "TURN_ELECTED":
+            client.turn_elected(data['winner'])
+        case "COLOR_PICKED":
+            client.color_picked(data['color'])
+        case "FINISHED":
+            client.finished()
+
+        case _:
+            client.send_event(event, data)
+            logger.debug(f"[{event}] server: sent: " + json.dumps(data))
 
 
 def connect():

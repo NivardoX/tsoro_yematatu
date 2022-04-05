@@ -4,7 +4,6 @@ from threading import Lock
 
 import client
 from client.chat_handler import ChatHandler
-from client.network import publish_event
 
 registered_objects = defaultdict(list)
 
@@ -90,6 +89,8 @@ def receive_remote_event(event, data):
 
 
 def toggle_turn(publish=True):
+    from client.network import publish_event
+
     global turn
     turn_mutex.acquire()
     turn = 1 if turn == 2 else 2
@@ -109,14 +110,14 @@ def set_turn(desired_turn, publish=True):
 
 
 def send_event(event, data, publish=True, emit=True, bypass_turn=False):
-    turn_mutex.acquire()
+    from client.network import publish_event
+
     if bypass_turn or client.state.turn == client.state.client_player:
         if publish:
             publish_event(event, data)
         if emit:
             data["_origin"] = "local"
             buffered_events.append((event, data))
-    turn_mutex.release()
 
 
 def self_register(obj, event):

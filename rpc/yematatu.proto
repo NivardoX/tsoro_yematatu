@@ -5,13 +5,34 @@ import "google/protobuf/empty.proto";
 package yematatu;
 
 service Yematatu{
-  // A simple RPC.
-  //
+
+ // Meta
  rpc SendMessage(Message) returns (MessageResponse) {}
  rpc HealthCheck(google.protobuf.Empty) returns (HealthCheckReponse) {}
 
-}
+ // General
+ rpc ToggleTurn(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+ rpc Surrender(SurrenderMessage) returns (google.protobuf.Empty) {}
+ rpc NewChatMessage(ChatMessage) returns (google.protobuf.Empty) {}
 
+ // Board Related
+ rpc PieceClicked(PieceClickedMessage) returns (google.protobuf.Empty) {}
+ rpc PieceSelectedForMovement(PieceSelectedForMovementMessage) returns (google.protobuf.Empty) {}
+ rpc EmptyTileClicked(EmptyTileClickedMessage) returns (google.protobuf.Empty) {}
+
+ rpc PiecePlaced(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+ rpc PieceMoved(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+ rpc TileForMovementSelected(TileForMovementSelectedMessage) returns (google.protobuf.Empty) {}
+
+ // Handshakes
+  rpc TurnVoted(TurnVotedMessage) returns (google.protobuf.Empty) {}
+  rpc TurnElected(TurnElectedMessage) returns (google.protobuf.Empty) {}
+
+ rpc ColorPicked(ColorPickedMessage) returns (google.protobuf.Empty) {}
+ rpc Finished(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+}
+// Meta
 message Message{
  string event = 1;
  string data = 2;
@@ -21,7 +42,38 @@ message MessageResponse{
  string message = 1;
  bool received = 2;
 }
-
 message HealthCheckReponse{
  bool received = 1;
+}message SurrenderMessage{
+ int32 player = 1;
+}
+
+// Board
+message ChatMessage{
+ string sender_type = 1;
+ string message = 2;
+ int32 player = 3;
+}
+message PieceSelectedForMovementMessage {
+ int32 tile_id = 1;
+ repeated int32 moves = 2;
+}
+message PieceClickedMessage{
+ int32 tile_id = 1;
+}
+message EmptyTileClickedMessage{
+ int32 id = 1;
+}
+message TileForMovementSelectedMessage{
+ int32 id = 1;
+}
+// Handshakes
+message TurnVotedMessage{
+ int32 vote = 1;
+}
+message TurnElectedMessage{
+ int32 winner = 1;
+}
+message ColorPickedMessage{
+ repeated int32 color = 1;
 }

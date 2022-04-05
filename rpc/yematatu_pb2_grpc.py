@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from rpc import yematatu_pb2 as client_dot_grpc_dot_yematatu__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from rpc import yematatu_pb2 as rpc_dot_yematatu__pb2
 
 
 class YematatuStub(object):
@@ -17,13 +17,78 @@ class YematatuStub(object):
         """
         self.SendMessage = channel.unary_unary(
                 '/yematatu.Yematatu/SendMessage',
-                request_serializer=client_dot_grpc_dot_yematatu__pb2.Message.SerializeToString,
-                response_deserializer=client_dot_grpc_dot_yematatu__pb2.MessageResponse.FromString,
+                request_serializer=rpc_dot_yematatu__pb2.Message.SerializeToString,
+                response_deserializer=rpc_dot_yematatu__pb2.MessageResponse.FromString,
                 )
         self.HealthCheck = channel.unary_unary(
                 '/yematatu.Yematatu/HealthCheck',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=client_dot_grpc_dot_yematatu__pb2.HealthCheckReponse.FromString,
+                response_deserializer=rpc_dot_yematatu__pb2.HealthCheckReponse.FromString,
+                )
+        self.ToggleTurn = channel.unary_unary(
+                '/yematatu.Yematatu/ToggleTurn',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.Surrender = channel.unary_unary(
+                '/yematatu.Yematatu/Surrender',
+                request_serializer=rpc_dot_yematatu__pb2.SurrenderMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.NewChatMessage = channel.unary_unary(
+                '/yematatu.Yematatu/NewChatMessage',
+                request_serializer=rpc_dot_yematatu__pb2.ChatMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.PieceClicked = channel.unary_unary(
+                '/yematatu.Yematatu/PieceClicked',
+                request_serializer=rpc_dot_yematatu__pb2.PieceClickedMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.PieceSelectedForMovement = channel.unary_unary(
+                '/yematatu.Yematatu/PieceSelectedForMovement',
+                request_serializer=rpc_dot_yematatu__pb2.PieceSelectedForMovementMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.EmptyTileClicked = channel.unary_unary(
+                '/yematatu.Yematatu/EmptyTileClicked',
+                request_serializer=rpc_dot_yematatu__pb2.EmptyTileClickedMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.PiecePlaced = channel.unary_unary(
+                '/yematatu.Yematatu/PiecePlaced',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.PieceMoved = channel.unary_unary(
+                '/yematatu.Yematatu/PieceMoved',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.TileForMovementSelected = channel.unary_unary(
+                '/yematatu.Yematatu/TileForMovementSelected',
+                request_serializer=rpc_dot_yematatu__pb2.TileForMovementSelectedMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.TurnVoted = channel.unary_unary(
+                '/yematatu.Yematatu/TurnVoted',
+                request_serializer=rpc_dot_yematatu__pb2.TurnVotedMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.TurnElected = channel.unary_unary(
+                '/yematatu.Yematatu/TurnElected',
+                request_serializer=rpc_dot_yematatu__pb2.TurnElectedMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.ColorPicked = channel.unary_unary(
+                '/yematatu.Yematatu/ColorPicked',
+                request_serializer=rpc_dot_yematatu__pb2.ColorPickedMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.Finished = channel.unary_unary(
+                '/yematatu.Yematatu/Finished',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
 
@@ -31,7 +96,8 @@ class YematatuServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def SendMessage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Meta
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -42,18 +108,164 @@ class YematatuServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ToggleTurn(self, request, context):
+        """General
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Surrender(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def NewChatMessage(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PieceClicked(self, request, context):
+        """Board Related
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PieceSelectedForMovement(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def EmptyTileClicked(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PiecePlaced(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PieceMoved(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def TileForMovementSelected(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def TurnVoted(self, request, context):
+        """Handshakes
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def TurnElected(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ColorPicked(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Finished(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_YematatuServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SendMessage': grpc.unary_unary_rpc_method_handler(
                     servicer.SendMessage,
-                    request_deserializer=client_dot_grpc_dot_yematatu__pb2.Message.FromString,
-                    response_serializer=client_dot_grpc_dot_yematatu__pb2.MessageResponse.SerializeToString,
+                    request_deserializer=rpc_dot_yematatu__pb2.Message.FromString,
+                    response_serializer=rpc_dot_yematatu__pb2.MessageResponse.SerializeToString,
             ),
             'HealthCheck': grpc.unary_unary_rpc_method_handler(
                     servicer.HealthCheck,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=client_dot_grpc_dot_yematatu__pb2.HealthCheckReponse.SerializeToString,
+                    response_serializer=rpc_dot_yematatu__pb2.HealthCheckReponse.SerializeToString,
+            ),
+            'ToggleTurn': grpc.unary_unary_rpc_method_handler(
+                    servicer.ToggleTurn,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'Surrender': grpc.unary_unary_rpc_method_handler(
+                    servicer.Surrender,
+                    request_deserializer=rpc_dot_yematatu__pb2.SurrenderMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'NewChatMessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.NewChatMessage,
+                    request_deserializer=rpc_dot_yematatu__pb2.ChatMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'PieceClicked': grpc.unary_unary_rpc_method_handler(
+                    servicer.PieceClicked,
+                    request_deserializer=rpc_dot_yematatu__pb2.PieceClickedMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'PieceSelectedForMovement': grpc.unary_unary_rpc_method_handler(
+                    servicer.PieceSelectedForMovement,
+                    request_deserializer=rpc_dot_yematatu__pb2.PieceSelectedForMovementMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'EmptyTileClicked': grpc.unary_unary_rpc_method_handler(
+                    servicer.EmptyTileClicked,
+                    request_deserializer=rpc_dot_yematatu__pb2.EmptyTileClickedMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'PiecePlaced': grpc.unary_unary_rpc_method_handler(
+                    servicer.PiecePlaced,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'PieceMoved': grpc.unary_unary_rpc_method_handler(
+                    servicer.PieceMoved,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'TileForMovementSelected': grpc.unary_unary_rpc_method_handler(
+                    servicer.TileForMovementSelected,
+                    request_deserializer=rpc_dot_yematatu__pb2.TileForMovementSelectedMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'TurnVoted': grpc.unary_unary_rpc_method_handler(
+                    servicer.TurnVoted,
+                    request_deserializer=rpc_dot_yematatu__pb2.TurnVotedMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'TurnElected': grpc.unary_unary_rpc_method_handler(
+                    servicer.TurnElected,
+                    request_deserializer=rpc_dot_yematatu__pb2.TurnElectedMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'ColorPicked': grpc.unary_unary_rpc_method_handler(
+                    servicer.ColorPicked,
+                    request_deserializer=rpc_dot_yematatu__pb2.ColorPickedMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'Finished': grpc.unary_unary_rpc_method_handler(
+                    servicer.Finished,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -77,8 +289,8 @@ class Yematatu(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/SendMessage',
-            client_dot_grpc_dot_yematatu__pb2.Message.SerializeToString,
-            client_dot_grpc_dot_yematatu__pb2.MessageResponse.FromString,
+            rpc_dot_yematatu__pb2.Message.SerializeToString,
+            rpc_dot_yematatu__pb2.MessageResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -95,6 +307,227 @@ class Yematatu(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/HealthCheck',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            client_dot_grpc_dot_yematatu__pb2.HealthCheckReponse.FromString,
+            rpc_dot_yematatu__pb2.HealthCheckReponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ToggleTurn(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/ToggleTurn',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Surrender(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/Surrender',
+            rpc_dot_yematatu__pb2.SurrenderMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def NewChatMessage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/NewChatMessage',
+            rpc_dot_yematatu__pb2.ChatMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PieceClicked(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/PieceClicked',
+            rpc_dot_yematatu__pb2.PieceClickedMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PieceSelectedForMovement(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/PieceSelectedForMovement',
+            rpc_dot_yematatu__pb2.PieceSelectedForMovementMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def EmptyTileClicked(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/EmptyTileClicked',
+            rpc_dot_yematatu__pb2.EmptyTileClickedMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PiecePlaced(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/PiecePlaced',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PieceMoved(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/PieceMoved',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def TileForMovementSelected(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/TileForMovementSelected',
+            rpc_dot_yematatu__pb2.TileForMovementSelectedMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def TurnVoted(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/TurnVoted',
+            rpc_dot_yematatu__pb2.TurnVotedMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def TurnElected(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/TurnElected',
+            rpc_dot_yematatu__pb2.TurnElectedMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ColorPicked(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/ColorPicked',
+            rpc_dot_yematatu__pb2.ColorPickedMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Finished(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/yematatu.Yematatu/Finished',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
