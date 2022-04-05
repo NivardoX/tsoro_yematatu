@@ -9,17 +9,17 @@ Simply run
 > pip3 install -r requirements.txt
 
 ## How to run
-Make sure to have permission to use port `8123`.
+Make sure to have permission to use port `8123` and `8124`.
 
 Then run
 > python3 main.py
 
-This implementation works on a peer to peer connection. You'll need to execute two instances of the program.
+You'll need to execute two instances of the program.
 
 
 ## Architecture
 
-The project heavily uses an Observer design pattern that is stored in `client/state.py`. It guides all changes on the local board. It also guides synchronization. Every local event may be published to the socket, and every received event on the socket is passed to the Observer Event Bus.
+The project heavily uses an Observer design pattern that is stored in `client/state.py`. It guides all changes on the local board. It also guides synchronization. Every local event may be published to the GRPC handler, and every received event on the GRPC Server is passed to the Observer Event Bus.
 
 ### Handshakes
 Two handshakes are defined
@@ -28,7 +28,7 @@ Two handshakes are defined
 
 The both handshakes follow the same state machine with some differences on presenting state. 
 
-The color handshake will disabled already picked colors.
+The color handshake will disable already picked colors.
 The turn handshake will allow users to vote(pick) which one should start the game. In case of a draw, a random one will be picked.
  ![StateMachine](state_machine.png)
 
